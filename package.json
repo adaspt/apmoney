@@ -1,0 +1,30 @@
+{
+  "name": "app-money",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "react-scripts": "0.5.1",
+    "typescript": "^2.0.3"
+  },
+  "dependencies": {
+    "bootstrap": "^4.0.0-alpha.4",
+    "classnames": "^2.2.5",
+    "querystring": "^0.2.0",
+    "react": "^15.3.2",
+    "react-dom": "^15.3.2",
+    "react-redux": "^4.4.5",
+    "react-router": "^2.8.1",
+    "redux": "^3.6.0",
+    "redux-form": "^6.0.5",
+    "redux-immutable-state-invariant": "^1.2.3",
+    "redux-logger": "^2.6.1",
+    "redux-thunk": "^2.1.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "proxy": "http://localhost:5000"
+}
