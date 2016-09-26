@@ -1,7 +1,7 @@
 import * as types from './actionTypes';
 
 const initialState = {
-    isAuthenticated: localStorage.getItem('idToken') != null
+    isAuthenticated: sessionStorage.getItem('idToken') != null
 };
 
 export default (state = initialState, { type, payload }) => {

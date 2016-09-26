@@ -5,6 +5,7 @@ using ApMoney.Application;
 
 namespace ApMoney.Controllers
 {
+    [Route("api/[controller]")]
     public abstract class ApiController : Controller
     {
         private readonly IMediator mediator;
@@ -14,7 +15,7 @@ namespace ApMoney.Controllers
             this.mediator = mediator;
         }
 
-        public async Task<IActionResult> SendAsync<TResponse>(IAsyncRequest<TResponse> message)
+        protected async Task<IActionResult> SendAsync<TResponse>(IAsyncRequest<TResponse> message)
         {
             if (message == null || !ModelState.IsValid)
             {

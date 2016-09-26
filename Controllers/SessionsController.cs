@@ -2,6 +2,7 @@ using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using ApMoney.Application.Sessions;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ApMoney.Controllers
 {
@@ -12,6 +13,7 @@ namespace ApMoney.Controllers
         {
         }
 
+        [AllowAnonymous]
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] CreateRequest message)
         {

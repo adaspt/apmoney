@@ -9,7 +9,10 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.IdentityModel.Tokens;
-using WebApplication.Data;
+using ApMoney.Models;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.AspNetCore.Mvc.Authorization;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApplication
 {
@@ -35,10 +38,18 @@ namespace WebApplication
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options =>
+            services.AddDbContext<AppDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddMvc();
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                    .RequireAuthenticatedUser()
+                    .RequireUserName("adas.petrovas@gmail.com")
+                    .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
+
             services.AddMediatR(typeof(Startup));
         }
 
@@ -69,8 +80,8 @@ namespace WebApplication
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "api",
-                    template: "api/{controller=Home}/{action=Index}/{id?}");
+                    name: "default",
+                    template: "{controller}/{id?}");
                 routes.MapRoute(
                     name: "spa",
                     template: "{*clientRoute}",

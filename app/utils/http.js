@@ -23,7 +23,12 @@ const handleError = async (response) => {
         errors = data.errors;
     }
 
-    throw new ApiError(message, errors);
+    const error = new ApiError(message, errors);
+    if (response.status === 401) {
+        error.status = 401;
+    }
+
+    throw error;
 };
 
 const getHeaders = () => {
