@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Generic;
 using System.Text;
+using ApMoney.Infrastructure;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -64,16 +64,18 @@ namespace WebApplication
                 }
             });
 
-            app.UseDefaultFiles(new DefaultFilesOptions
-            {
-                DefaultFileNames = new List<string>() { "index.html" }
-            });
-
             app.UseStaticFiles();
 
             app.UseMvc(routes =>
             {
-                routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "api",
+                    template: "api/{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                    name: "spa",
+                    template: "{*clientRoute}",
+                    defaults: new { controller = "Pages", action = "Index" },
+                    constraints: new { clientRoute = new SpaRouteConstraint("clientRoute") });
             });
         }
     }
