@@ -4,7 +4,7 @@ import FormField from './FormField';
 
 const renderField = ({ input, id, label, prepend, helpText, meta: { touched, error }}) => (
     <FormField label={label} forId={id} prepend={prepend} touched={touched} error={error} helpText={helpText}>
-        <input id={id} type="number" {...input} className="form-control" />
+        <input id={id} type="text" inputMode="numeric" {...input} className="form-control" />
     </FormField>
 );
 
